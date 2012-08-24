@@ -24,9 +24,9 @@ The setters and getters are dynamic, and included by default in the library usin
 	    'your_param_3' => 'Your Value 3'
 	));
 
-	$Ups->set_your_param_1('Your Value 1');
-	$Ups->set_your_param_2('Your Value 2');
-	$Ups->set_your_param_3('Your Value 3'); 
+	$Obj->set_your_param_1('Your Value 1');
+	$Obj->set_your_param_2('Your Value 2');
+	$Obj->set_your_param_3('Your Value 3'); 
 
 #### Getters
 
@@ -38,9 +38,9 @@ The setters and getters are dynamic, and included by default in the library usin
 	    'your_param_3' => 'Your Value 3'
 	));
 
-	$Ups->get_your_param_1(); // Return 'Your Value 1'
-	$Ups->get_your_param_2(); // Return 'Your Value 2'
-	$Ups->get_your_param_3(); // Return 'Your Value 3' 
+	$Obj->get_your_param_1(); // Return 'Your Value 1'
+	$Obj->get_your_param_2(); // Return 'Your Value 2'
+	$Obj->get_your_param_3(); // Return 'Your Value 3' 
 
 ---
 
