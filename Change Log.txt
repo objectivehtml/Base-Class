@@ -1,0 +1,15 @@
+/**
+* Base Class
+* Author: Justin Kimbrell (Objective HTML)
+* Version: 1.0.2
+* Build: 20121014
+* Copyright 2012 - All rights reserved
+* http://objectivehtml.com/
+*/
+
+1.0.2
+- (Bug Fix) Wrapped class in a class_exists conditional to prevent conflicts.
+
+1.0.1
+- (Feature) Added new append() magic method.
+- (Feature) Added new fixed get/set bug if default value was NULL;
