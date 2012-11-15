@@ -6,13 +6,13 @@
  * @author		Justin Kimbrell
  * @copyright	Copyright (c) 2012, Objective HTML
  * @link 		http://www.objectivehtml.com/
- * @version		1.0.2
- * @build		20121014
+ * @version		1.1
+ * @build		20121115
  */
 
-if(!class_exists('Base_class'))
+if(!class_exists('BaseClass'))
 {
-	abstract class Base_class {
+	abstract class BaseClass {
 			
 	    /**
 	     * Contructor
@@ -47,19 +47,46 @@ if(!class_exists('Base_class'))
 		    
 		public function __call($method, $args)
 		{
-			$magic_methods = array(
-				'/^get_/'    => 'get_' , 
-				'/^set_/'    => 'set_',
-				'/^append_/' => 'append_'
-			);
+			$magic_methods = array('get', 'set', 'append');
 			
-			foreach($magic_methods as $regex => $replace)
+			// Add support for legacy code not supporting PSR-2. 
+			// Setters/getters can look like get_method() & set_method()
+			
+			if(preg_match("/\w*_/us", $method))
+			{			
+				$newMethod = array();
+				
+				foreach(explode('_', $method) as $index => $part)
+				{
+					if($index > 0)
+					{
+						$part = ucfirst($part);
+					}
+					
+					$newMethod[] = $part;
+				}
+				
+				$method = implode('', $newMethod);
+				
+				return call_user_func_array(array($this, $method), $args);
+			}
+			
+			foreach($magic_methods as $replace)
 			{
+				$regex = "/^(".$replace.")([A-Z]\w*)/";
+				
 		    	if(preg_match($regex, $method))
-		    	{
-		    		$property = str_replace($replace, '', $method);
-		    		$method = rtrim($replace, '_');
+		    	{		 
+		    		$method   = preg_replace($regex, '$1 $2', $method);
+		    		$method   = explode(' ', $method);
+		    		$property = lcfirst($method[1]);
+		    		$method   = $method[0];
 			    }
+		    }
+		    
+		    if(!isset($property))
+		    {
+				return;    
 		    }
 		    
 		    $args = array_merge(array($property), $args);	    	
@@ -123,4 +150,10 @@ if(!class_exists('Base_class'))
 		}
 		
 	}
+}
+
+
+if(!class_exists('Base_Class'))
+{
+	abstract class Base_Class extends BaseClass {}
 }

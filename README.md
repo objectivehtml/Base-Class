@@ -1,6 +1,6 @@
 # Base Class
 
-#### Version 1.0.0 (2012-08-24)
+#### Version 1.1.0 (2012-11-15)
 
 ---
 
@@ -18,29 +18,35 @@ The setters and getters are dynamic, and included by default in the library usin
 
 *Setters are used to override default property values.*
 
-	$Obj = new Your_Class(array(
-	    'your_param_1' => 'Your Value 1'
-	    'your_param_2' => 'Your Value 2'
-	    'your_param_3' => 'Your Value 3'
+	$Obj = new YourClass(array(
+	    'yourParam1' => 'Your Value 1'
+	    'yourParam2' => 'Your Value 2'
+	    'yourParam3' => 'Your Value 3'
 	));
 
-	$Obj->set_your_param_1('Your Value 1');
-	$Obj->set_your_param_2('Your Value 2');
-	$Obj->set_your_param_3('Your Value 3'); 
+	$Obj->setYourParam1('Your Value 1');
+	$Obj->setYourParam2('Your Value 2');
+	$Obj->setYourParam3('Your Value 3'); 
 
 #### Getters
 
 *Getters are used to retrieve property values.*
 
-	$Obj = new Your_Class(array(
-	    'your_param_1' => 'Your Value 1'
-	    'your_param_2' => 'Your Value 2'
-	    'your_param_3' => 'Your Value 3'
+	$Obj = new YourClass(array(
+	    'yourParam1' => 'Your Value 1'
+	    'yourParam2' => 'Your Value 2'
+	    'yourParam3' => 'Your Value 3'
 	));
 
-	$Obj->get_your_param_1(); // Return 'Your Value 1'
-	$Obj->get_your_param_2(); // Return 'Your Value 2'
-	$Obj->get_your_param_3(); // Return 'Your Value 3' 
+	$Obj->getYourParam1(); // Return 'Your Value 1'
+	$Obj->getYourParam2(); // Return 'Your Value 2'
+	$Obj->getYourParam3(); // Return 'Your Value 3' 
+
+#### PSR-2 compliance
+
+*BaseClass adds support for all API calls that use snake_case. This is great for CodeIgniter libraries that aren't PSR-2 and people still wanting to adhere to their CodeIgniter styleguide.*
+
+	$Obj->get_your_param() // Returns the same thing as $Obj->getYourParam();
 
 ---
 
