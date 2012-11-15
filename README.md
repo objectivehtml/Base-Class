@@ -47,7 +47,8 @@ The setters and getters are dynamic, and included by default in the library usin
 *BaseClass adds support for all API calls that use snake_case. This is great for CodeIgniter libraries that aren't PSR-2 and people still wanting to adhere to their CodeIgniter styleguide.*
 
 	$Obj->get_your_param() // Returns the same thing as $Obj->getYourParam();
-
+	$Obj->run_some_method() // Same as $Obj->runSomeMethod();
+	
 ---
 
 ### License
