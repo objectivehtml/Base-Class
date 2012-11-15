@@ -1,11 +1,15 @@
 /**
 * Base Class
 * Author: Justin Kimbrell (Objective HTML)
-* Version: 1.0.2
-* Build: 20121014
+* Version: 1.1.0
+* Build: 20121115
 * Copyright 2012 - All rights reserved
 * http://objectivehtml.com/
 */
+
+1.1
+- Added PSR-2 compliance with fallback for legacy code.
+- Added new magic method that translates get_method() into getMethod();
 
 1.0.2
 - (Bug Fix) Wrapped class in a class_exists conditional to prevent conflicts.

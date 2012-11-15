@@ -10,9 +10,9 @@
  * @build		20121014
  */
 
-if(!class_exists('Base_class'))
+if(!class_exists('BaseClass'))
 {
-	abstract class Base_class {
+	abstract class BaseClass {
 			
 	    /**
 	     * Contructor
@@ -47,18 +47,30 @@ if(!class_exists('Base_class'))
 		    
 		public function __call($method, $args)
 		{
-			$magic_methods = array(
-				'/^get_/'    => 'get_' , 
-				'/^set_/'    => 'set_',
-				'/^append_/' => 'append_'
-			);
+			$magic_methods = array('get', 'set', 'append');
 			
-			foreach($magic_methods as $regex => $replace)
+			// Add support for legacy code not supporting PSR-2. 
+			// Setters/getters can look like get_method() & set_method()
+			
+			if(preg_match("/(get|set)_(\\w*)/us", $method))
+			{			
+				$method   = explode('_', $method);
+				$property = $method[1];
+				$method   = $method[0] . ucfirst($property);
+				
+				return call_user_func_array(array($this, $method), $args);
+			}
+			
+			foreach($magic_methods as $replace)
 			{
+				$regex = "/^(".$replace.")([A-Z]\w*)/";
+				
 		    	if(preg_match($regex, $method))
-		    	{
-		    		$property = str_replace($replace, '', $method);
-		    		$method = rtrim($replace, '_');
+		    	{		 
+		    		$method   = preg_replace($regex, '$1 $2', $method);
+		    		$method   = explode(' ', $method);
+		    		$property = lcfirst($method[1]);
+		    		$method   = $method[0];
 			    }
 		    }
 		    
@@ -123,4 +135,10 @@ if(!class_exists('Base_class'))
 		}
 		
 	}
+}
+
+
+if(!class_exists('Base_Class'))
+{
+	abstract class Base_Class extends BaseClass {}
 }
