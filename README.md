@@ -6,7 +6,7 @@
 
 ### About the Class
 
-This class is intended to be a base class in which all your other classes could inherit. The idea is provide a basic set of dynamic setters and getters available with class method or from within the construct.
+This class is intended to be a base in which all your other classes could extend. The idea is to provide a consistent architecture for all your classes with your application. With PSR-2 compliant code becoming the norm, BaseClass also takes care of routing method with "Snake Casing" as well as "Camel Casing". BaseClass also provides a default parameters in the each class' construct to set default parameters. The dynamic setters, getters, and count methods are made public, so you never have to create these things if you are adhering to the default logic.
 
 ---
 
