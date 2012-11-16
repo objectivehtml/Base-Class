@@ -6,8 +6,8 @@
  * @author		Justin Kimbrell
  * @copyright	Copyright (c) 2012, Objective HTML
  * @link 		http://www.objectivehtml.com/
- * @version		1.1
- * @build		20121115
+ * @version		1.2.0
+ * @build		20121116
  */
 
 if(!class_exists('BaseClass'))
@@ -47,6 +47,8 @@ if(!class_exists('BaseClass'))
 		    
 		public function __call($method, $args)
 		{
+			$orig_method = $method;
+			
 			$magic_methods = array('get', 'set', 'append');
 			
 			// Add support for legacy code not supporting PSR-2. 
@@ -76,11 +78,22 @@ if(!class_exists('BaseClass'))
 				$regex = "/^(".$replace.")([A-Z]\w*)/";
 				
 		    	if(preg_match($regex, $method))
-		    	{		 
-		    		$method   = preg_replace($regex, '$1 $2', $method);
-		    		$method   = explode(' ', $method);
-		    		$property = lcfirst($method[1]);
-		    		$method   = $method[0];
+		    	{	
+		    		if(preg_match("/^(get)(Total)(\w*)$/", $method, $matches))
+	    			{
+	    				if(isset($matches[3]))
+	    				{
+	    					$method   = 'count';
+		    				$property = lcfirst($matches[3]);
+	    				}
+	    			}
+	    			else
+	    			{
+			    		$method   = preg_replace($regex, '$1 $2', $method);
+			    		$method   = explode(' ', $method);
+			    		$property = lcfirst($method[1]);
+			    		$method   = $method[0];
+	    			}		    		
 			    }
 		    }
 		    
@@ -90,7 +103,7 @@ if(!class_exists('BaseClass'))
 		    }
 		    
 		    $args = array_merge(array($property), $args);	    	
-		    	
+		    
 		    return call_user_func_array(array($this, $method), $args);
 		}
 		
@@ -141,14 +154,31 @@ if(!class_exists('BaseClass'))
 		 * @return	mixed
 		 */
 	       
-		protected function append($prop = 'fields', $value)
+		public function append($prop, $value)
 		{
 			if(isset($this->$prop))
 			{
-				$this->$prop = array_merge($this->{'get_'.$prop}(), $value);
+				$this->$prop = array_merge($this->{'get'.ucfirst($prop)}(), $value);
 			}
 		}
 		
+		/**
+		 * Count the defined property
+		 *
+		 * @access	public
+		 * @param	string 	propery name
+		 * @return	int
+		 */
+	       
+		public function count($prop)
+		{
+			if(isset($this->$prop))
+			{
+				return count($this->$prop);
+			}
+			
+			return 0;
+		}	
 	}
 }
 

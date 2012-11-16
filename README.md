@@ -1,6 +1,6 @@
 # Base Class
 
-#### Version 1.1.0 (2012-11-15)
+#### Version 1.2.0 (2012-11-16)
 
 ---
 
@@ -32,15 +32,15 @@ The setters and getters are dynamic, and included by default in the library usin
 
 *Getters are used to retrieve property values.*
 
-	$Obj = new YourClass(array(
-	    'yourParam1' => 'Your Value 1'
-	    'yourParam2' => 'Your Value 2'
-	    'yourParam3' => 'Your Value 3'
-	));
-
 	$Obj->getYourParam1(); // Return 'Your Value 1'
 	$Obj->getYourParam2(); // Return 'Your Value 2'
 	$Obj->getYourParam3(); // Return 'Your Value 3' 
+
+#### Counts
+
+*Counts are used to retrieve the count a property.*
+
+	$Obj->getTotalParam(); // Returns count($this->param);
 
 #### PSR-2 compliance
 

@@ -1,11 +1,14 @@
 /**
 * Base Class
 * Author: Justin Kimbrell (Objective HTML)
-* Version: 1.1.0
-* Build: 20121115
+* Version: 1.2.0
+* Build: 20121116
 * Copyright 2012 - All rights reserved
 * http://objectivehtml.com/
 */
+
+1.2
+- Added dynamic count methods - getTotalParam();
 
 1.1
 - Added PSR-2 compliance with fallback for legacy code.
