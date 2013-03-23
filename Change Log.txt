@@ -1,11 +1,17 @@
 /**
 * Base Class
 * Author: Justin Kimbrell (Objective HTML)
-* Version: 1.2.0
-* Build: 20121116
+* Version: 1.2.2
+* Build: 20130323
 * Copyright 2012 - All rights reserved
 * http://objectivehtml.com/
 */
+
+1.2.2
+- Fixed an issue with the constructor setting properties correctly.
+
+1.2.1
+- Fixed a bug that broken PHP 5.2 due to a missing lcfirst() function.
 
 1.2
 - Added dynamic count methods - getTotalParam();
