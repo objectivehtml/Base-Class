@@ -6,8 +6,8 @@
  * @author		Justin Kimbrell
  * @copyright	Copyright (c) 2012, Objective HTML
  * @link 		http://www.objectivehtml.com/
- * @version		1.2.0
- * @build		20121116
+ * @version		1.2.2
+ * @build		20130323
  */
 
 if(!class_exists('BaseClass'))
@@ -26,14 +26,11 @@ if(!class_exists('BaseClass'))
 	    {
 		    foreach($data as $key => $value)
 		    {
-			    if(property_exists($this, $key))
-			    {
-				    $this->$key = $value;
-			    }
+			    $this->{'set_'.$key}($value);
 		    }
 		    
 		    return;
-	    }    
+	    }        
 	   
 	    
 	    /**
@@ -186,4 +183,11 @@ if(!class_exists('BaseClass'))
 if(!class_exists('Base_Class'))
 {
 	abstract class Base_Class extends BaseClass {}
+}
+
+if(function_exists('lcfirst') === false) {
+    function lcfirst($str) {
+        $str[0] = strtolower($str[0]);
+        return $str;
+    }
 }
